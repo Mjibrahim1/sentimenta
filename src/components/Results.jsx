@@ -1,19 +1,19 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const sentimentColors = {
-  Positive: 'text-green-600',
-  Negative: 'text-red-600',
-  Neutral: 'text-yellow-600',
+  psitive: 'text-green-600',
+  negative: 'text-red-600',
+  neutral: 'text-yellow-600',
 };
 
 export default function Results({ result }) {
-  const { sentiment, confidence, confidence_scores } = result;
+  const { sentiment, confidence, scores } = result;
   const percentage = (confidence * 100).toFixed(1);
 
   const chartData = [
-    { name: 'Positive', score: confidence_scores.positive },
-    { name: 'Negative', score: confidence_scores.negative },
-    { name: 'Neutral', score: confidence_scores.neutral },
+    { name: 'Positive', score: scores.positive },
+    { name: 'Negative', score: scores.negative },
+    { name: 'Neutral', score: scores.neutral },
   ];
 
   return (

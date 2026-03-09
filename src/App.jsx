@@ -4,7 +4,7 @@ import InputForm from './components/InputForm';
 import Results from './components/Results';
 import ExampleButtons from './components/ExampleButtons';
 import About from './components/About';
-import { mockAnalyze } from './mockApi';
+
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -12,22 +12,45 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleAnalyze = async () => {
-    if (!inputText.trim()) {
-      setError('Please enter some text to analyze.');
-      return;
+ const handleAnalyze = async () => {
+  if (!inputText.trim()) {
+    setError('Please enter some text to analyze.');
+    return;
+  }
+
+  setError('');
+  setLoading(true);
+
+  try {
+    const response = await fetch(
+      "https://sophiao-final-year-project.hf.space/predict",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "accept": "application/json",
+          "X-API-Key": "finalyearprojectbabcockunivbersitycomputerscience"
+        },
+        body: JSON.stringify({
+          text: inputText
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("API error");
     }
-    setError('');
-    setLoading(true);
-    try {
-      const data = await mockAnalyze(inputText);
-      setResult(data);
-    } catch (err) {
-      setError('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+
+    const data = await response.json();
+    console.log("API RESPONSE:", data);
+setResult(data);
+
+  } catch (err) {
+    setError('Failed to analyze text. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-50">

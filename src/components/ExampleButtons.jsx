@@ -1,8 +1,8 @@
 const examples = [
-  { text: 'Dis food sweet die!', sentiment: 'Positive' },
-  { text: 'Na wa for this service, I no happy at all.', sentiment: 'Negative' },
-  { text: 'I no know wetin happen today.', sentiment: 'Neutral' },
-  { text: 'The guy dey find trouble.', sentiment: 'Negative' },
+  { text: 'This food sweet die!', sentiment: '' },
+  { text: 'Na wa for this service, I no happy at all.', sentiment: '' },
+  { text: 'I no know wetin happen today.', sentiment: '' },
+  { text: 'The guy dey find trouble.', sentiment: '' },
 ];
 
 export default function ExampleButtons({ setInputText }) {
